@@ -1,0 +1,45 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        CheckOut
+    </div>
+    <div class="panel-footer">
+        <div class="table-responsive">
+            <table class="table"
+            *ngIf='walmartProducts && walmartProducts.length'>
+                <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>Product</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr *ngFor='#product of walmartProducts '>
+                        <td>
+                            <img 
+                                [src]='product.mediumImage'
+                                [title]='product.name'
+                                [style.width.px]='imageWidth'
+                                [style.margin.px]='imageMargin'> 
+                        </td>
+                        <td>{{ product.name }}</td>                   
+                        <td>{{ product.salePrice | currency: 'USD':true:'1.2-2'}}</td>
+                        <td>
+                            <a >
+                                <button type="button"  class="btn btn-app warn" (click)="onDeleteCart(product.itemId)">
+                                    <i class="glyphicon glyphicon-remove"></i> Delete
+                                </button>
+                            </a>
+                        </td>               
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <a  class="btn btn-default" (click)='onBack()' style='width:80px'>
+            <i class="glyphicon glyphicon-chevron-left"></i> Back
+        </a>
+    </div>
+</div>

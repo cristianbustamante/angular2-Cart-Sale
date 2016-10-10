@@ -1,0 +1,85 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Select Category
+    </div>
+
+    <div class="panel-body">
+        <button type="button"  class="btn btn-app" (click)="getProductsCategory('91083_3947')">
+            <i class="fa fa-fast-backward"></i> Auto Electronics
+        </button>
+        <button type="button"  class="btn btn-app" (click)="getProductsCategory('5426')">
+            <i class="fa fa-fast-backward"></i> Photo Center
+        </button>
+        <button type="button"  class="btn btn-app" (click)="getProductsCategory('91083')">
+            <i class="fa fa-fast-backward"></i> Auto & Tires
+        </button>
+        <button type="button"  class="btn btn-app" (click)="getProductsCategory('2636')">
+            <i class="fa fa-fast-backward"></i> Video Games
+        </button>
+        <button type="button"  class="btn btn-app" (click)="getProductsCategory('1115193')">
+            <i class="fa fa-fast-backward"></i> Household Essentials
+        </button>
+    </div>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">Filter Product Name:</div>
+        <div class="col-md-4">
+            <input type='text'
+            [(ngModel)]='listFilter'>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Filter by: {{listFilter}}</h3>
+            </div>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table"
+            *ngIf='walmartProducts && walmartProducts.length'>
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="btn btn-primary"
+                                (click)='toggleImage()'>
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>5 Star Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='#product of walmartProducts | productFilter:listFilter '>
+                        <td>
+                           <img *ngIf='showImage'
+                                [src]='product.mediumImage'
+                                [title]='product.productName'
+                                [style.width.px]='imageWidth'
+                                [style.margin.px]='imageMargin'> 
+                        </td>
+                        <td>{{ product.name }}</td>                   
+                        <td>{{ product.salePrice | currency: 'USD':true:'1.2-2'}}</td>
+                        <td>
+                            <ai-star [rating]='product.standardShipRate'></ai-star>
+                        </td>
+                         <td>
+                            <a href="{{product.productUrl}}">
+                                View
+                            </a>
+                        </td>
+                        <td>
+                            <a >
+                                <button type="button"  class="btn btn-app" (click)="onAddCart(product.itemId)">
+                                     <i class="glyphicon glyphicon-shopping-cart"></i> add to cart
+                                </button>
+                            </a>
+                        </td>               
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
